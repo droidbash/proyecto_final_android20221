@@ -8,8 +8,7 @@ String unencodedPath = '/geocoding/v5/mapbox.places/';
 String proximity = 'ip';
 String types =
     'place,postcode,address,country,region,locality,district,neighborhood,poi';
-String token =
-    'sk.eyJ1IjoiZG1lbnJvZCIsImEiOiJjbDNmNmpkZzYwY3V0M2dwcXR3dW1vdjd6In0.ld7ZfkyjMYL-m7uGAT8d7A';
+String token = '';
 
 class ApiRest extends ChangeNotifier {
   String keyWords = 'Riviera Ensenada.json';
