@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_final_android20221/services/api_rest.dart';
+import 'package:proyecto_final_android20221/imports/.pages.dart';
+import 'package:proyecto_final_android20221/imports/.services.dart';
 
 void main() {
   runApp(const Services());
@@ -24,7 +25,7 @@ class Services extends StatelessWidget {
 }
 
 Widget myApp() => MaterialApp(
-      title: 'API-REST',
+      title: 'Mapbox search',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const Home(),
     );
@@ -34,59 +35,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ApiRest apiRest = Provider.of<ApiRest>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mapbox Search:'),
       ),
-      body: apiRest.isLoading
-          ? Center(
-              child: Text(apiRest.msg ?? "Loading..."),
-            )
-          : Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'My City',
-                          ),
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
-                          initialValue: apiRest.keyWords
-                              .substring(0, apiRest.keyWords.indexOf('.')),
-                        ),
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.search_outlined))
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: apiRest.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        leading: const Icon(
-                          Icons.place_outlined,
-                        ),
-                        title: Text(apiRest.data[index].placeName ?? ""),
-                        subtitle: Text(apiRest.data[index].id ?? ""),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+      body: const Search(),
     );
   }
 }
